@@ -1,0 +1,181 @@
+<!doctype html>
+<html><head>
+    <meta chartset="UTF-8"> <!--helps to work around the world-->
+    <meta name="viewport" conetent="width=device-width, initial-scale=1"> <!--responsive design-->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <style>
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        
+        <style>
+        html,body {
+         height: 100%;
+         width: 100%;
+         margin: 0;
+         padding: 0;
+         font-family: Arial, Helvetica, sans-serif;
+         text-align: center;
+        }
+        main {
+         max-width: 700px;
+         margin: auto;
+        }
+        nav {
+         position: fixed;
+         color: white;
+         background-color: #4F9393;
+         height: 150px;
+         width: 100%;
+         max-width: 700px;
+        }
+        h1 {
+          text-align: center;
+          font-size: 30px;
+        }
+        h2 {
+          text-align: center;
+        }
+        .ball100, .ball70, .ball60 {
+        border-radius: 50%;
+        display: inline-block;
+        }
+        .ball70 {
+        height: 100px;
+        width: 100px;
+        }
+        .ball100 {
+        height: 100px;
+        width: 100px;
+        }
+        .ball60 {
+          height:100px;
+          width:100px;
+        }
+        .square70 {
+        height: 100px;
+        width: 100px;
+        display: inline-block;
+        }
+        .square60 {
+        height: 100px;
+        width: 100px;
+        display: inline-block;
+        }
+        
+        
+        @media screen and (max-width:600px) {
+          nav {
+            background-color: #CCA7A2;
+            height: 100%;
+            width: 300px;
+          }
+        }
+        </style>
+        </head>
+        <body>
+        
+        <main>
+        <nav>
+        <h1>Fun with Shapes!</h1>
+        <p>Help your kids to learn their shapes, colors, and numbers with these fun activities</p>
+        <p>Make sure to maximize your screen for optimal function.</p>
+        </nav>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <h2>Click on the square to turn it into a circle!</h2>
+        <tr>
+          <td style="width:300px"></td>
+            <td>
+                <div class="square70" style="background-color: #D6D1FF" onclick="switchShape(this)"></div>
+            </td>
+        </tr>
+        <br></br>
+        <h2>Click on the pink circle to change the color of the screen!</h2>
+        <tr>
+            <td colspan="2" style="text-align:center">
+            <div class="ball60" style="background-color: rgb(113, 154, 241)"></div>
+            <div onclick="doPink()" class="ball100" style="background-color:#C17767"></div>
+            <div class="ball60" style="background-color: rgb(241, 241, 113)"></div>
+        </td>
+        </tr>
+        <br></br>
+        <h2>Find the orange circle and put your mouse over it to go back to normal!</h2>
+        <tr>
+            <td>
+              <div class="ball60" style="background-color: rgb(241, 241, 113)"></div>
+              <div class="ball60" style="background-color: rgb(113, 154, 241)"></div>
+              <div onmouseover="doOrange()" class="ball70" style="background-color: #eeb311"></div>
+            </td>
+        </tr>
+       <br></br>
+       <h2>Enter a number bigger than 100 to make the square bigger.  Then try a number smaller than 100 to make the square smaller.</h2>
+        <tr>
+            <td>
+                <input placeholder="Enter a number" onkeydown="input1Keypress(event,this)">
+                <br></br>
+                <div class="square60" style="background-color: rgb(11, 68, 66)" id="greenSpot"></div>
+            </td>
+        </tr>
+        <br></br>
+        <div id="gbyediv">
+            <h2>Finished? Click the button below</h2>
+            <button id="goodbye">click here</button>
+          </div>
+        
+        </main>
+        <script>
+    
+          function switchShape(me) {
+                //check first class attached to the pink square
+                //if it's a ball make it a square
+
+                if (me.classList.item(0) == "ball70") {
+                    me.classList.remove("ball70");
+                    me.classList.add("square70")
+                }
+                else {
+                    //or vice versa
+                    me.classList.remove("square70");
+                    me.classList.add("ball70");
+                }
+            }
+
+            function doPink() {
+                //set body background-color to random RGB color
+                var r= Math.floor(Math.random() * 256);
+                var g= Math.floor(Math.random() * 256);
+                var b= Math.floor(Math.random() * 256);
+                //need to make color in this format rgb(100, 100, 100)
+                document.body.style.backgroundColor= "rgb(" + r + "," + g + "," + b + ")";
+            }
+            function doOrange() {
+                //set background to white
+                document.body.style.backgroundColor ="white";
+            }
+
+            function input1Keypress(event,me) {
+                //grab the keypress from input 1, need to pass the event
+              var char= event.keyCode;
+              if (char == 13) {
+                //get a number from the input with parseInt since an input returns a string
+                var hw=parseInt(me.value);
+                //set height and width
+                document.getElementById("greenSpot").style.height= hw + "px";
+                document.getElementById("greenSpot").style.width= hw + "px";
+                }
+            }
+
+          $(document).ready(function() {
+            var firstclick = true;
+            $("#goodbye").on("click",function() {
+              $("#gbyediv").load("ajaxfinal.html");
+            });
+          });
+        </script>
+          
+        
+        
+        </body></html>
